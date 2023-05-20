@@ -73,6 +73,8 @@ sudo docker run -p 5000:5000 image-finder
 
 ## Methodology
 
+- Step 1 : Feature extraction
+
 This project relies on matching images. 
 
 Naturally, we need to extract features from raw images, and I did it using different methods
@@ -84,6 +86,36 @@ Naturally, we need to extract features from raw images, and I did it using diffe
 
 - Microsoft Beit features
 
-PS : The extraction was done via Colab notebooks: Find all necessay details <a href="https://drive.google.com/drive/folders/1ZWhsn1-76QYfPqoPLZn7Ms_g_1hrq0b_?usp=sharing" target="_blank">here</a>.
+PS : The extraction was done via Colab notebooks. Find all necessay details <a href="https://drive.google.com/drive/folders/1ZWhsn1-76QYfPqoPLZn7Ms_g_1hrq0b_?usp=sharing" target="_blank">here</a>.
+
+The features were then saved in `.npy` format for each image in the dataset.
+
+
+- Step 2 : Matching metrics
+
+Different methodologies were used for matching. 
+
+For ResNet-50, simple cosine similarity does the trick.
+
+However, for the SIFT and microsoft-Beit features, since they extract local features, we cannot rely on cosine similarity.
+
+Hence, global matching between features of image A and image B were used. Here is how it works :
+
+    - Say image A has `n` local features and image B has `m` local features, and a latent space of dimension `h`
+
+    - The dot product between features matrix A and B provides a matrix of size `n` x `m`
+
+    - Each elements (i, j) of this matrix provides information of the matching similarity between `i`-th feature of 
+    matrix A and `j`-th feature of matrix B.
+
+    - We count all matching features (i, j) as all the pair of features whose most similar with each other, which means
+
+        - Feature `i` is the most similar to feature `j` AND
+
+        - Feature `j` is the most similar to feature `i`
+
+
+This is referred to brute force matchng in the code (you can find it in `utils.py`)
+
 
 
