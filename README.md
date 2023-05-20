@@ -5,7 +5,7 @@ Hi, this is a repository that implements an image matching API.
 
 ## How to setup
 
-First, ceate a virtual environment and make sure you're using python 3.8
+First, create a virtual environment and make sure you're using python 3.8
 
 Second, follow these commands :
 
@@ -32,7 +32,7 @@ python app.py
 
 Once you've followed the setup instructions, you can make requests to the API.
 
-To be noted : Three different methods are used for finding similarities : 
+To be noted : Three different methodologies are implemented for finding similarities
 
 - SIFT
 
@@ -57,7 +57,7 @@ PS : You can find some samples in the folder `example_images`
 
 ## Docker
 
-You can also run API on a docker container for more robustness. Follow these steps :
+You can also run the API on a docker container for more robustness. Follow these steps :
 
 - Build docker image :
 
@@ -107,7 +107,7 @@ sudo docker run -p 5000:5000 image-finder
       - Each elements (i, j) of this matrix provides information of the matching similarity between `i`-th feature of 
       matrix A and `j`-th feature of matrix B.
 
-      - We count all matching features (i, j) as all the pair of features whose most similar with each other, which means
+      - We count all matching features (i, j) as all the pairs of features whose most similar with each other, which means
 
           - Feature `i` is the most similar to feature `j` AND
 
@@ -127,3 +127,16 @@ sudo docker run -p 5000:5000 image-finder
   3. Find the 3 highest similarity results
 
   4. Output the corresponding image ids (in order)
+
+
+## Conclusion
+
+This methodology provides differents ways of extracting/matching features from images.
+
+The one that worked the most was ResNet-50, even if the result is not always perfect.
+
+When using deep learning approaches, one should always pay attention to the data on which the model was pretrained.
+
+This data may lead to interpretations of how the model extracts features from images.
+
+If we had more data, few-shot learning would be a good training scheme for our usage.
