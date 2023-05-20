@@ -112,8 +112,18 @@ sudo docker run -p 5000:5000 image-finder
           - Feature `i` is the most similar to feature `j` AND
 
           - Feature `j` is the most similar to feature `i`
-          
-  This is referred to brute force matchng in the code (you can find it in `utils.py`)
 
+  This is referred to brute force matching in the code (can be found in `utils.py`)
 
+- Step 3 :
 
+  Once a similarity metric is defined for each pair of images, and since we already extracted features from the images provided in the dataset,
+  when a new image is provided, here are the steps that goes through the API :
+
+  1. Extract features from new images
+
+  2. Compute similarity to all already extracted features
+
+  3. Find the 3 highest similarity results
+
+  4. Output the corresponding image ids (in order)
